@@ -16918,8 +16918,8 @@ function hamburger() {
     span.forEach(function (item) {
       item.style.border = '1px';
       item.style.borderStyle = 'solid';
-      item.style.borderColor = 'rgb(19, 54, 118)';
-      item.style.background = 'rgb(217, 220, 236)';
+      item.style.borderColor = 'rgb(41, 169, 255)';
+      item.style.background = 'rgb(255, 255, 255)';
       // console.log(item);				
     });
   });

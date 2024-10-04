@@ -16895,6 +16895,51 @@ if (window.NodeList && !NodeList.prototype.forEach) {
 
 /***/ }),
 
+/***/ "./src/js/modules/buttons.js":
+/*!***********************************!*\
+  !*** ./src/js/modules/buttons.js ***!
+  \***********************************/
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ buttonModule; }
+/* harmony export */ });
+function buttonModule() {
+  function addActiveClass(parentSelector, activeClass) {
+    const worksID = document.getElementById('works');
+    const aboutID = document.getElementById('about');
+    const contactsID = document.getElementById('contacts');
+    const elements = document.querySelectorAll(parentSelector); // делегирование событий не подходит, так как класс активности назначается и родительскому элементу (подсвечивается), а динамические кнопки не добавляются
+    // const elements = document.querySelectorAll(`${parentSelector} button`); // используем простое навешивание событий, `${parentSelector} button` - обращение в внутренним элементам родительского блока ОБЯЗАТЕЛЬНО!!!
+
+    elements.forEach(elem => {
+      // перебираем элементы внутри родительского блока и навешиваем обработчик событий
+      elem.addEventListener('click', event => {
+        elements.forEach(elem => {
+          // убираем сначала все классы активности, а потом добавляем их
+          elem.classList.remove(activeClass); // перебираем каждый элемент, который будет избавляться от классов активности внутри родительского блока
+        });
+        event.target.classList.add(activeClass); // назначаем класс активности
+
+        setTimeout(() => {
+          if (event.target && event.target.matches('.promo__btn_works')) {
+            worksID.scrollIntoView(); // scrollIntoView() -  позволяет переместить элемент в область видимости, выравнивая его по верхнему краю экрана.
+          } else if (event.target && event.target.matches('.promo__btn_about')) {
+            aboutID.scrollIntoView(); // Если же хочется выровнять элемент по нижнему краю, передайте в параметр значение false: scrollIntoView(false)
+          } else if (event.target && event.target.matches('.promo__btn_contacts')) {
+            contactsID.scrollIntoView();
+          }
+        }, 500);
+      });
+    });
+  }
+  addActiveClass('.promo__btns .promo__btn', 'promo__btn_active'); // '.promo__btns .promo__btn' - обращение в внутренним элементам родительского блока ОБЯЗАТЕЛЬНО!!!	
+}
+
+/***/ }),
+
 /***/ "./src/js/modules/hamburger.js":
 /*!*************************************!*\
   !*** ./src/js/modules/hamburger.js ***!
@@ -16982,10 +17027,13 @@ function jqueryModule() {
     // 	  .closest('div.container').find('div.catalog__content').removeClass('catalog__content_active').eq($(this).index()).addClass('catalog__content_active');
     // });
 
+    //----------------------------------------------------------------------------------------
     // кнопки/ссылки промо
-    $('.promo__btns').on('click', 'a:not(.promo__btn_active)', function () {
-      $(this).addClass('promo__btn_active').siblings().removeClass('promo__btn_active');
-    });
+    // $('.promo__btns').on('click', 'a:not(.promo__btn_active)', function() {
+    // 	$(this)
+    // 		.addClass('promo__btn_active').siblings().removeClass('promo__btn_active');
+    // });
+    //----------------------------------------------------------------------------------------
 
     //каталог - слайдер
     // function toggleSlide(item) {
@@ -17230,7 +17278,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_hamburger_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/hamburger.js */ "./src/js/modules/hamburger.js");
 /* harmony import */ var _modules_percent_scale_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/percent_scale.js */ "./src/js/modules/percent_scale.js");
 /* harmony import */ var _modules_jquery_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/jquery.js */ "./src/js/modules/jquery.js");
+/* harmony import */ var _modules_buttons_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/buttons.js */ "./src/js/modules/buttons.js");
 /* eslint-disable linebreak-style */
+
 
 
 
@@ -17248,6 +17298,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
   //модуль работы с функциями jquery
   (0,_modules_jquery_js__WEBPACK_IMPORTED_MODULE_7__["default"])();
+
+  //модуль активности кнопок
+  (0,_modules_buttons_js__WEBPACK_IMPORTED_MODULE_8__["default"])();
 });
 }();
 /******/ })()

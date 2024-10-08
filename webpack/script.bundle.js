@@ -17279,7 +17279,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_percent_scale_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/percent_scale.js */ "./src/js/modules/percent_scale.js");
 /* harmony import */ var _modules_jquery_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/jquery.js */ "./src/js/modules/jquery.js");
 /* harmony import */ var _modules_buttons_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/buttons.js */ "./src/js/modules/buttons.js");
-/* eslint-disable linebreak-style */
 
 
 
